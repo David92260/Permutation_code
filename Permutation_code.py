@@ -40,10 +40,14 @@ code = {'A': 'B',
 	' ': ' '}
 
 def strip_accents(text):
-    text = unicodedata.normalize('NFD', text)
-    text = text.encode('ascii', 'ignore')
-    text = text.decode("utf-8")
-    return str(text)
+	try:
+        	text = unicode(text, 'utf-8')
+	except TypeError: # if text is already utf-8 
+		pass
+	text = unicodedata.normalize('NFD', text)
+	text = text.encode('ascii', 'ignore')
+	text = text.decode("utf-8")
+	return str(text)
 
 def encode(un_texte):
 	"Takes a string, encodes it and returns the resulting string"
